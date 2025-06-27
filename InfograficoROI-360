@@ -84,11 +84,54 @@
                 height: 100% !important;
             }
         }
+        /* ERRO 404 - estilo de página de erro */
+        .error-404 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 70vh;
+            background: linear-gradient(180deg, #2D3748 0%, #1A202C 100%);
+            color: #fff;
+            text-align: center;
+        }
+        .error-404 h1 {
+            font-size: 7rem;
+            color: #FF4500;
+            margin-bottom: 1rem;
+            font-weight: 900;
+        }
+        .error-404 p {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+        .error-404 a {
+            background: #4CAF50;
+            color: #fff;
+            padding: 0.75rem 2rem;
+            border-radius: 999px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: background 0.3s;
+        }
+        .error-404 a:hover {
+            background: #388e3c;
+        }
     </style>
 </head>
 <body class="bg-[#1A202C] text-gray-200">
 
-    <main class="container mx-auto p-4 md:p-8">
+    <!-- ERRO 404: Caso de página não encontrada -->
+    <div id="error404" class="error-404" style="display:none;">
+        <h1>404</h1>
+        <p>Ops! A página que você procura não foi encontrada.<br>
+        Talvez ela tenha sido removida, renomeada ou esteja temporariamente indisponível.</p>
+        <a href="/">Voltar para a página inicial</a>
+    </div>
+
+    <main id="maincontent" class="container mx-auto p-4 md:p-8">
 
         <header class="text-center py-8">
             <div class="section-gradient-box p-8 max-w-4xl pdf-page-break-after">
@@ -289,6 +332,17 @@
     </main>
 
     <script>
+        // Simulação de ERRO 404 para demonstração — remova este trecho para comportamento normal
+        // Para implementar o erro 404 real, é preciso integrar com o backend ou lógica de rota
+        // Aqui mostramos o erro caso haja um parâmetro ?erro=404 na URL
+        (function() {
+            const url = new URL(window.location.href);
+            if (url.searchParams.get('erro') === '404') {
+                document.getElementById('maincontent').style.display = 'none';
+                document.getElementById('error404').style.display = 'flex';
+            }
+        })();
+
         window.addEventListener('DOMContentLoaded', () => {
             function wrapLabels(label, maxWidth) {
                 const words = label.split(' ');
